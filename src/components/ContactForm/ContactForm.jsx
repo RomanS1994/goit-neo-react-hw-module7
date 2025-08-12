@@ -21,6 +21,28 @@ export default function ContactForm({ phones, setPhones }) {
   const phoneId = useId();
 
   const handleSubmit = (values, actions) => {
+    const name = values.name.trim();
+    const number = values.number.trim();
+
+    const isDuplicateName = phones.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    const isDuplicateNumber = phones.some(
+      contact =>
+        contact.number.replace(/\s+/g, '') === number.replace(/\s+/g, '')
+    );
+
+    if (isDuplicateName) {
+      alert(`Contact with name "${name}" already exists!`);
+      return;
+    }
+
+    if (isDuplicateNumber) {
+      alert(`Contact with number "${number}" already exists!`);
+      return;
+    }
+
     const contact = {
       id: nanoid(),
       name: values.name,
@@ -29,7 +51,6 @@ export default function ContactForm({ phones, setPhones }) {
 
     const newPhones = [contact, ...phones];
 
-    console.log(newPhones);
     setPhones(newPhones);
 
     actions.resetForm();
