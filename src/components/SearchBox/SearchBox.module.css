@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+input {
+  background-color: transparent;
+  width: 220px;
+  height: 36px;
+  border-radius: 8px;
+  color: black;
+}
