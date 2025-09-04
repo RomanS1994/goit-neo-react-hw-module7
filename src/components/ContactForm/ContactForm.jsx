@@ -5,13 +5,14 @@ import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import { ErrorMessage } from 'formik';
 
-import { addContact, useContacts } from '../../redux/contactsSlice';
-import { useDispatch } from 'react-redux';
+import { selectContacts } from '../../redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contactsOps';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
 
-  const phones = useContacts();
+  const phones = useSelector(selectContacts);
   const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, 'Too Short!')
